@@ -83,8 +83,10 @@
 					
 					echo "Võib kasutajat luua! Kasutajanimi on ".$create_email." ja parool on ".$create_password."ja räsi on".$hash;
 					$stmt = $mysqli->prepare("INSERT INTO users (email, password) Values (?, ?)");
-					echo $mysqli->error;
+					
+					//echo $mysqli->error;
 					//echo $stmt->error;
+					
 					$hash = hash("sha512", $password);
 					
 					$stmt->bind_param("ss", $create_email, $hash);
@@ -98,7 +100,7 @@
 			//võtab ära tühikud, enterid, tabid
 			$data = trim ($data);
 			//tagurpidi kaldkriipsud
-			$data =stripslashes($data);
+			$data = stripslashes($data);
 			$data = htmlspecialchars($data);
 			return $data;	
 			
