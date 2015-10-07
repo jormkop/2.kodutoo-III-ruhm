@@ -93,14 +93,14 @@
 				$last_name = test_input($_POST["last_name"]);
 			}
 			
-		if( $create_email_error== "" && $create_password==""){
+		if( $create_email_error== "" && $create_password_error=="" && $first_name_error=="" && $last_name_error==""){
 					
 			$hash = hash("sha512", $create_password);
 			echo "kasutajanimi on ".$create_email." , parool  ".$create_password." ja räsi on ".$hash;
 			
 			$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password, first_name, last_name) VALUES (?,?,?,?)");
 			
-			$stmt->bind_param("ss", $create_email, $hash);
+			$stmt->bind_param("ssss", $create_email, $hash, $first_name, $last_name);
 			$stmt->execute();
 			$stmt->close();
 		}
